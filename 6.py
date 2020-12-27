@@ -243,8 +243,8 @@ while(True):
         start_time = time.time()
         
         while(time.time() - start_time < 30):
-            print("waiting for {}".format(int(time.time() - start_time)))
             text = get_audio()
+            print("waiting for {}".format(int(time.time() - start_time)))            
             if(text == "ERROR"):
                 print("Inside ERROR")
                 print("waiting for {}".format(int(time.time() - start_time)))
