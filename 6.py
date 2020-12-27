@@ -35,7 +35,7 @@ def google_news():
         text = get_audio()        
         continue
     if text == "no":
-        googlenews.search('india')
+        googlenews.search('world')
     else:
         googlenews.search(text)    
     
@@ -208,7 +208,8 @@ def filterDate(text):
         extension = "nd"
     elif date[2][-1] == "3":
         extension = "rd"
-    filtered_date = "" + date[2] + extension + " " + MONTHS[int(date[1])+ 1] + " "
+    print(date)
+    filtered_date = "" + date[2] + extension + " " + MONTHS[int(date[1]) - 1] + " "
 
     time = time.split(":")
     if int(time[0]) > 12:
@@ -219,9 +220,10 @@ def filterDate(text):
         return filtered_time
     else:
         return filtered_date
+    
 SERVICE = authenticate_google()
-CALENDER_STRS = ["what do i have","do i have plans","am i busy"]
-NOTE_STRS = ["make a note","write this down","take a note","write down"]
+CALENDER_STRS = ["what do i have","do i have plans","am i busy", "plans"]
+NOTE_STRS = ["make a note","write this down","take a note","write down","note"]
 NAMES = ["scratches", "sketches","50","crutches","traces","rajesh","catches"]
 TIME = ["time","date"]
 SEARCH_ITEMS = ["search", "what is", "what are"]
@@ -247,23 +249,31 @@ while(True):
                 print("Inside ERROR")
                 print("waiting for {}".format(int(time.time() - start_time)))
                 continue 
+            
             start_time = time.time()
-
+            
+#CHECKED DEFINE_TERMS
             if(set(text.split()) & set(DEFINE_TERMS)):
-                search_term = 'https://en.wikipedia.org/wiki/' + str(text.split()[1:])
-                raw_html = urllib.request.urlopen('https://en.wikipedia.org/wiki/Natural_language_processing')  
+                print("define")
+                text = text.replace("define ", "")
+                text = text.replace(" ", "_")
+                search_term = 'https://en.wikipedia.org/wiki/' + text
+                print(search_term)
+                raw_html = urllib.request.urlopen(search_term)  
                 raw_html = raw_html.read()
                 article_html = bs.BeautifulSoup(raw_html, 'lxml')
                 article_paragraphs = article_html.find_all('p')
                 speak(article_paragraphs[0].text)
                 continue
-
+            
+#CHECKED SEARCH_YOUTUBE
             if(set(text.split()) & set(SEARCH_YOUTUBE)):
                 url = f"https://www.youtube.com/results?search_query={text}"
                 webbrowser.get().open(url)
                 speak("here is a video!! hope this helps!!")
                 continue
-            
+
+#CHECKED SEARCH_LOCATION            
             if(set(text.split()) & set(SEARCH_LOCATION)):
                 speak("what would you like me to locate!!")
                 search = get_audio()
@@ -276,14 +286,16 @@ while(True):
                 webbrowser.get().open(url)
                 speak("here is the location")
                 continue
-            
-            if(set(text.split()) & set(SEARCH_ITEMS)):                
+
+#CHECKED SEARCH_ITEMS        
+            if(set(text.split()) & set(SEARCH_ITEMS)):   
+                text = text.replace("search","")
                 url = "https://google.com/search?q=" + text
                 webbrowser.get().open(url)
                 speak("here is what i found")
                 continue
 
-                
+#CHECKED CALENDER_STRS                
             if(set(text.split()) & set(CALENDER_STRS)): 
                 date = get_date(text)
                 print(date)
@@ -294,18 +306,22 @@ while(True):
                     speak("i can't hear you please try again!!")
                     break
                 continue
-                           
+
+#CHECKED NOTE_STRS
             if(set(text.split()) & set(NOTE_STRS)): 
                 speak("what would you like me to write down?")
                 note_text = get_audio()
                 note(note_text)
                 speak("I've made a note of that.")
                 continue
-                            
+
+#CHECKED TIME                         
             if(set(text.split())&set(TIME)):
                 print(str(datetime.datetime.now()))
                 speak(filterDate(text))
                 continue
+
+#CHECKED SEARCH_NEWS
             if(set(text.split())&set(SEARCH_NEWS)):
                 google_news()
                 continue
