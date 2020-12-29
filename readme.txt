@@ -13,5 +13,3 @@ pip install tflearn
 pip install numpy
 pip install nltk
 nltk.download("punkt")
-
-place credentials.json, intents.json, token.pickle on the main file directory

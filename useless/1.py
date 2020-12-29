@@ -18,3 +18,5 @@ def speak(text):
     playsound.playsound(filename)
 speak("hello suvnkr")
 
+print("hello")
+

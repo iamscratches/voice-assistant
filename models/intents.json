@@ -1,0 +1,68 @@
+{"intents": [
+        {"tag": "wakeup",
+        "patterns": ["scratches", "hey scratches", "hi scratches", "yo scratches", "hello scratches", "excuse me scratches", "sketches","50","crutches","traces","rajesh","catches"],
+        "responses": ["I'm listening", "how may i help you", "i am ready for your order", "yes sir, how may i help you", "yes sir can i help you out with something"],
+         "context_set": ""
+        },
+        {"tag": "greeting",
+         "patterns": ["Hi", "Hello", "Good day", "Whats up", "hey"],
+         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+         "context_set": ""
+        },
+        {"tag": "goodbye",
+         "patterns": ["See you later", "Goodbye", "I am Leaving", "Have a Good day", "bye bye", "tata"],
+         "responses": ["Sad to see you go :(", "Talk to you later", "Goodbye!", "nice to meet you", "nice to talk to you", "have a wonderful day!!"],
+         "context_set": ""
+        },
+        {"tag": "age",
+         "patterns": ["how old", "when is your birthday", "when were you born", "what is your age", "how old are you", "age?"],
+         "responses": ["Sorry but since i was never born but was built by my creator i don't have a specific birthday nor an age but i can say you this that my creator started working on me since feb of 2019 and maybe working with even more advanced version of myself as days passes by!!"],
+         "context_set": ""
+        },
+        {"tag": "name",
+         "patterns": ["what is your name", "what should I call you", "whats your name?", "who are you"],
+         "responses": ["You can call me Scratches.", "I'm Scratches!", "I'm Scratches aka a creation from scratch."],
+         "context_set": ""
+        },
+        {"tag": "define",
+         "patterns": ["define", "explain", "explain the term", "what are", "who is", "where is", "what is", "what is the meaning of", "can you tell me what is", "can you please tell me what is"],
+         "responses": ["ok sure sir i will try to tell according to what i have learnt"],
+         "context_set": ""
+        },
+        {"tag": "youtube",
+         "patterns": ["search for a video", "play a video", "search the youtube for", "find a video on"],
+         "responses": ["here is a list of suggestion according to your search", "here are a list of videos that you might like", "Hope this is the search result you are looking for", "here it is!! hope this helps", "this is what i found based on your search"],
+         "context_set": ""
+        },        
+        {"tag": "location",
+         "patterns": ["can you find me a location", "locate", "find where is ", "search a location", "find a location"],
+         "responses": ["what would you like me to locate!!", "pick a place that you would like me to locate", "which place would you like me to locate!!"],
+         "context_set": ""
+        },
+        {"tag": "google search",
+         "patterns": ["search for", "search for the keyword", "search for","can you make a google search on", "google", "google for", "google on"],
+         "responses": ["here is a list of suggestion according to your search", "Hope this is the search result you are looking for", "here it is!! hope this helps", "this is what i found based on your search", "here is what i found on the internet"],
+         "context_set": ""
+        },
+        {"tag": "calender",
+         "patterns": ["what do i have","do i have plans","am i busy", "do i have anything on", "show my schedule for today", "show my schedule on", "search my schedule"],
+         "responses": ["here is what i found from your calender", "please wait while i search your calender", "let me check you schedule please wait a moment", "give me a moment while check your schedule for the day"],
+         "context_set": ""
+        },
+        {"tag": "note",
+         "patterns": ["can you please make a note","take down a note please", "take down a note", "note down","take a note", "make a note", "write this down","take down"],
+         "responses": ["what would you like me to make a note of", "what is it that you want me to take a note of", "ok sir i am ready just tell me what would you like me to make a note of", "ok i am listening please procedd with whatever you want me ta take a note of"],
+         "context_set": ""
+        },
+        {"tag": "date n time",
+         "patterns": ["tell me the time","tell me the date", "can you tell me what time it is", "can you please tell me what is the date", "please tell me the date", "please tell me the time", "what is it on the clock"],
+         "responses": ["sure give me a moment while i recall", "sure let me check"],
+         "context_set": ""
+        },
+        {"tag": "news",
+         "patterns": ["tell me the news", "read me some morning news", "read me some news", "could i get something to eat", "i want to hear some news", "it is news time"],
+         "responses": ["ok! sure master that will be my pleasure", "ok sure!!", "yeah definitely!! why not", "listening to a news a day keeps stress away!! haha!!"],
+         "context_set": ""
+        }        
+   ]
+}

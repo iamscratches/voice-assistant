@@ -14,20 +14,20 @@ import tensorflow as tf
 import random
 import json
 import pickle
-import os.path
+# import os.path
 from os import path
 
 stemmer = LancasterStemmer()
 tf.compat.v1.reset_default_graph()
 
 
-with open("intents.json") as file:
+with open("models\\intents.json") as file:
     data = json.load(file)
     
     
 
 try:
-    with open("data.pickle", "rb") as f:
+    with open("models\\data.pickle", "rb") as f:
         words, labels, training, output = pickle.load(f)
     
 except:
@@ -75,7 +75,7 @@ except:
     training = np.array(training)
     output = np.array(output)
     
-    with open("data.pickle", "wb") as f:
+    with open("models\\data.pickle", "wb") as f:
         pickle.dump((words, labels, training, output), f)
 
 
@@ -87,13 +87,13 @@ net = tflearn.regression(net)
 
 model = tflearn.DNN(net)
 
-if(path.exists("model.tflearn.index")):
-    model.load("model.tflearn")
+if(path.exists("models\\model.tflearn.index")):
+    model.load("models\\model.tflearn")
 else:
-    model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
-    model.save("model.tflearn")
+    model.fit(training, output, n_epoch=500, batch_size=8, show_metric=True)
+    model.save("models\\model.tflearn")
 
-def bag_of_words(s, words):
+def __bag_of_words(s, words):
     bag = [0 for _ in range(len(words))]
     
     s_words = nltk.word_tokenize(s)
@@ -106,28 +106,22 @@ def bag_of_words(s, words):
                 
     return np.array(bag)
 
-def chat():
-    print("start typing with the bot (type quit to stop)!")
-    while True:
-        inp = input("You: ")
-        if inp.lower() == 'quit':
-            break;
+def chat(text):
+    results = model.predict([__bag_of_words(text, words)])
+    #print(results)
+    results_index = np.argmax(results)
+    #print(results_index)
+    tag = labels[results_index]
+    print(tag)
+    
+    if results[0][results_index] > 0.75:        
+        for tg in data['intents']:
+            if tg['tag'] == tag:
+                responses = tg['responses']
+                
+        return tag,random.choice(responses)
+    else:
+        return "none","I didn't quiet understand you, please try again!!"
         
-        results = model.predict([bag_of_words(inp, words)])
-        #print(results)
-        results_index = np.argmax(results)
-        #print(results_index)
-        tag = labels[results_index]
-        #print(tag)
-        
-        if results[0][results_index] > 0.7:        
-            for tg in data['intents']:
-                if tg['tag'] == tag:
-                    responses = tg['responses']
-                    
-            print(random.choice(responses))
-        else:
-            print("I didn't quiet understand you, please try again!!")
-        
-chat()
+
 
