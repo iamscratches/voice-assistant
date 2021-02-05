@@ -20,7 +20,7 @@ import bs4 as bs
 import urllib.request
 from GoogleNews import GoogleNews
 
-from apis.IOFeatures import speak, get_audio
+from apis.IOFeatures import speak, get_audio, speakThread
 
 __SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 __MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
@@ -208,10 +208,12 @@ def calenderCheck(text):
 def noteMaker(text):
     date = datetime.datetime.now()
     speak("Would you like to give a name to your note??")
-    # if("yes" in (get_audio()).split()):
-    if("yes" in "no"):
-        speak("Please say the name for your note...")
-        file_name = get_audio().replace(" ","_") + ".txt"
+    
+    if("yes" in (get_audio()).split()):
+    # if("yes" in "no"):
+        speakThread("Please say the name for your note...")
+        rename = get_audio()
+        file_name = rename.replace(" ","_") + ".txt"
     else:
         speak("ok sir!! no problem i'll save it myself with a date and time stamp so that you may know when it's created")
         file_name = str(date).replace(":","-") + "-note.txt"
@@ -245,7 +247,7 @@ def dateTime(text):
         time[0] = str(int(time[0]) % 12)
     filtered_time =  "" + time[0] + ":" + time[1] + " " + ampm
     if "time" in text:
-        speak(filtered_time)
+        # speak(filtered_time)
         return filtered_time
     else:
         return filtered_date + " " + filtered_time

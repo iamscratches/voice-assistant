@@ -1,6 +1,6 @@
 {"intents": [
         {"tag": "wakeup",
-        "patterns": ["scratches", "hey scratches", "hi scratches", "yo scratches", "hello scratches", "excuse me scratches", "sketches","50","crutches","traces","rajesh","catches"],
+        "patterns": ["scratches", "scratchers", "ok scratchers","hey scratches", "hi scratches", "yo scratches", "hello scratches", "excuse me scratches", "sketches","50","crutches","traces","rajesh","catches"],
         "responses": ["I'm listening", "how may i help you", "i am ready for your order", "yes sir, how may i help you", "yes sir can i help you out with something"],
          "context_set": ""
         },

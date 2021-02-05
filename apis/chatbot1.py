@@ -112,9 +112,9 @@ def chat(text):
     results_index = np.argmax(results)
     #print(results_index)
     tag = labels[results_index]
-    print(tag)
+    # print(tag)
     
-    if results[0][results_index] > 0.75:        
+    if results[0][results_index] > 0.90:        
         for tg in data['intents']:
             if tg['tag'] == tag:
                 responses = tg['responses']

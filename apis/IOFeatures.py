@@ -6,8 +6,16 @@ Created on Mon Dec 28 14:29:54 2020
 """
 import speech_recognition as sr
 import pyttsx3
+import threading
+
+def speakThread(text, rate = 150, volume = 1.0):
+    t1 = threading.Thread(target= __startSpeech, args= (text, rate, volume))
+    t1.setName("speech")
+    t1.start()
 
 def speak(text, rate = 150, volume = 1.0):
+    __startSpeech(text, rate, volume)
+def __startSpeech(text, rate, volume):
     engine = pyttsx3.init() # object creation
 
     """ RATE"""
@@ -22,20 +30,22 @@ def speak(text, rate = 150, volume = 1.0):
     voices = engine.getProperty('voices')       #getting details of current voice
     engine.setProperty('voice', voices[1].id)  #changing index, changes voices. o for male
     # print(voices)
-
+    
+    print("Scratches : " + text)
     engine.say(text)
     engine.runAndWait()
 
 def get_audio():
     r = sr.Recognizer()
     print('listening...')
+    # said = input("You : ")
     with sr.Microphone() as source:
         audio = r.listen(source)
         said = ""
 
         try:
             said = r.recognize_google(audio)
-            print(said)
+            print("You : " + said)
         except Exception as e:
             print("Exception: " + str(e))
             return "ERROR"
